@@ -1,0 +1,225 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+[colors]
+;background = ${xrdb:color0:#222}
+background = #eff5ff
+background-alt = #444
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+
+
+[global/wm]
+margin-top=0
+margin-bottom=0
+override-redirect = true
+wm-restack = i3
+
+[bar/top]
+width = 100% 
+height = 25
+offset-x = 0
+offset-y = 0
+
+locale = de_DE.UTF-8
+background = ${colors.background}
+foreground = #000
+
+font-0 = SFNS Display:weight=Light:size=11;2
+font-1 = FontAwesome:size=10;2
+
+modules-left = i4 rofi xwindow spotify
+modules-center = i3
+modules-right =  volume date  battery
+
+module-margin-left = 1
+module-margin-right = 2
+
+tray-position = right
+tray-padding = 1
+tray-transparent = false
+tray-detached = false
+tray-background = ${colors.background}
+
+underline-size = 3
+
+spacing = 1
+padding-left = 2
+padding-right = 2
+
+[module/volume]
+type = internal/volume
+
+format-volume = <ramp-volume> 
+module-margin-right = 0
+
+ramp-volume-0 =  
+ramp-volume-1 =  
+ramp-volume-2 = 
+
+format-volume-foreground = #000
+format-volume-background = ${colors.background}
+
+label-muted = 🔇muted
+
+[module/xkeyboard]
+type = internal/xkeyboard
+;blacklist-0 = num lock
+
+format-prefix = " "
+;format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+label-layout = %layout%
+label-layout-underline = ${colors.secondary}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+;label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.secondary}
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+module-margin-left = 2
+format-padding = 2
+format-background = ${colors.background}
+
+[module/i4]
+type = internal/i3
+;strip-wsnumbers = true
+enable-click = false
+index-sort = true
+format = <label-state> <label-mode>
+
+label-focused =   %name%  
+label-focused-foreground = #000
+label-focused-background =${colors.background}
+label-focused-padding = 1
+
+label-unfocused = 
+label-visible = 
+
+
+[module/i3]
+type = internal/i3
+strip-wsnumbers = true
+enable-click = true
+index-sort = true
+format = <label-state>
+
+label-focused =    
+label-focused-foreground = #000
+label-focused-background =${colors.background}
+label-focused-padding = 1
+
+label-unfocused =    
+label-unfocused-foreground = #000
+label-unfocused-background = ${colors.background}
+label-unfocused-padding = 1
+
+label-urgent =   
+label-urgent-foreground = #000
+label-urgent-background = ${colors.background} 
+label-urgent-padding = 1
+
+[module/date]
+type = internal/date
+interval = 1
+date = " %a %H:%M"
+date-alt = " %d %B" 
+
+;format = %date% 
+;format-padding = 1
+;format-background = #7aa04b
+;format-foreground = #94a086
+
+[module/powermenu]
+type = custom/menu
+
+label-open =power
+label-open-foreground = #000
+label-open-background = ${colors.background}
+label-close =  cancel
+label-close-foreground = #dc322f
+label-close-background = ${colors.background}
+label-separator-foreground = #222222
+label-separator-background = ${colors.background}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = shutdown
+menu-0-1-exec = menu-open-2
+menu-0-2 = logout
+menu-0-2-exec = menu-open-3
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = systemctl reboot
+
+menu-2-0 = shutdown
+menu-2-0-exec = systemctl poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+menu-3-0 = logout
+menu-3-0-exec = i3-msg exit
+menu-3-1 = cancel
+menu-3-1-exec = menu-open-0
+
+[module/spotify]
+type = custom/script
+exec = sh ~/.config/polybar/spotify
+interval = 1
+click-left = playerctl play-pause
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = ACAD
+full-at = 80
+
+format-charging = <animation-charging> <label-charging>
+;format-charging-underline = #ffb52a
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-alt}
+;format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+
+[module/rofi]
+type = custom/script
+;exec = echo "    Finder"
+exec = echo "Finder"
+click-left = rofi -show run
+
+[module/google_search]
+type = custom/script
+exec = echo ""
+click-left = nautilus
+;click-left = echo "" | rofi -dmenu -p "Search:" -font "lemon 7" -width 150 -location 3 -xoffset -192 -yoffset 18 | xargs -I{} xdg-open 
+

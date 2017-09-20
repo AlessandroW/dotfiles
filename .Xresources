@@ -1,0 +1,117 @@
+﻿#include "/home/temporary/.cache/wal/xcolors"
+
+! Solarized color scheme for the X Window System
+!
+! http://ethanschoonover.com/solarized
+
+
+! Common
+
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
+
+
+! Dark
+
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+
+
+! Light
+
+! #define S_base03        #fdf6e3
+! #define S_base02        #eee8d5
+! #define S_base01        #93a1a1
+! #define S_base00        #839496
+! #define S_base0         #657b83
+! #define S_base1         #586e75
+! #define S_base2         #073642
+! #define S_base3         #002b36
+
+
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
+!
+! URxvt*background:            S_base03
+URxvt*termName: rxvt-256color
+*.background:             S_base03
+URxvt.background:     [80]S_base03
+*foreground:              S_base0
+*fading:                  40
+*fadeColor:               S_base03
+*cursorColor:             S_base1
+*pointerColorBackground:  S_base01
+*pointerColorForeground:  S_base1
+
+*color0:                  S_base02
+*color1:                  S_red
+*color2:                  S_green
+*color3:                  S_yellow
+*color4:                  S_blue
+*color5:                  S_magenta
+*color6:                  S_cyan
+*color7:                  S_base2
+*color9:                  S_orange
+*color8:                  S_base03
+*color10:                 S_base01
+*color11:                 S_base00
+*color12:                 S_base0
+*color13:                 S_violet
+*color14:                 S_base1
+*color15:                 S_base3
+
+
+! rxvt-unicode ---------------------------------------------------------------
+URxvt.termName: rxvt
+URxvt.transparent: true
+URxvt.inheritPixmap: False
+URxvt.imLocale: de_DE.UTF-8
+URxvt.scrollBar: false
+URxvt.scrollBar right: false
+URxvt.scrollColor: #000000
+URxvt.saveLines: 500
+URxvt.urlLauncher:/usr/bin/firefox
+URxvt.cursorBlink: true
+URxvt.geometry: 100x50
+URxvt.fading: 25%
+URxvt.font: xft:iosevka:pixelsize=14:style=Regular
+urxvt.boldFont: xft:iosevka:pixelsize=14:style=Heavy
+urxvt.depth: 32
+URxvt.perl-ext-common: default,matcher,clipboard,tabbed,urxvt-colors
+URxvt.keysm.Shift-Control-C: perl:clipboard:copy
+URxvt.keysm.Shift-Control-V: perl:clipboard:paste
+URxvt*borderless: 1
+URxvt.matcher.button: 1
+urxvt*dynamicColors: on
+urxvt*keysm.F12: perl:urxvt-colors
+urxvt*keysm.Shift-Control-D: perl:urxvt-colors
+urxvt*keysm.F5: ~/.dynamic-colors/bin/dynamic-colors i
+
+! ROFI
+! -----------------------------------------------------------------------------
+
+! Use extended color scheme
+rofi.color-enabled:                  true
+! Color scheme for normal row
+rofi.color-normal:                   #ffffff,#525d76,#f5f5f5,#5294e2,#ffffff
+! Color scheme for urgent row
+rofi.color-urgent:                   #ffffff,#dc322f,#f5f5f5,#5294e2,#dc322f
+! Color scheme for active row
+rofi.color-active:                   #ffffff,#c2cad0,#f5f5f5,#5294e2,#c2cad0
+! Color scheme window
+rofi.color-window:    argb:ffffffff,#f5f5f5
+! Separator style (none, dash, solid)
+rofi.separator-style:                solid
+
