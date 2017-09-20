@@ -344,6 +344,7 @@ exec compton -b -c
 exec redshift -l 49.791304:9.953355
 exec dunst
 exec battery_checker
+exec adaptive_theme
 exec xset s off -dpms
 exec nextcloud
 exec --no-startup-id i3-msg 'workspace $workspace2; exec firefox ; workspace $workspace1; exec emacs' 
