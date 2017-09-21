@@ -15,3 +15,5 @@ git clone --separate-git-dir=~/.myconf /path/to/repo ~
 
 for more information: dotfiles.html
 
+https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
+https://news.ycombinator.com/item?id=11071754
