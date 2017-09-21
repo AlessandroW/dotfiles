@@ -3,7 +3,7 @@
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-(add-to-list 'load-path "/home/temporary/.themes/tomorrow-theme/GNU Emacs")
+;;(add-to-list 'load-path "/home/temporary/.themes/tomorrow-theme/GNU Emacs")
 ;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 (package-initialize)
@@ -49,7 +49,6 @@
 
 (require 'theme-changer)
 (change-theme 'solarized-light 'solarized-dark)
-
 (rainbow-mode 1)
 
 ;;(minimap-mode 1)
@@ -83,7 +82,7 @@
 (define-key js-mode-map (kbd "M-.") nil)
 
 (add-hook 'js2-mode-hook (lambda ()
-                           (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 
 (require 'powerline)
 ;;(require 'powerline-evil)
@@ -115,8 +114,10 @@
  '(centered-window-mode t)
  '(custom-safe-themes
    (quote
-    ("3380a2766cf0590d50d6366c5a91e976bdc3c413df963a0ab9952314b4577299" "c9f102cf31165896631747fd20a0ca0b9c64ecae019ce5c2786713a5b7d6315e" "36746ad57649893434c443567cb3831828df33232a7790d232df6f5908263692" "b0c5c6cc59d530d3f6fbcfa67801993669ce062dda1435014f74cafac7d86246" "b67b2279fa90e4098aa126d8356931c7a76921001ddff0a8d4a0541080dee5f6" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "7f1263c969f04a8e58f9441f4ba4d7fb1302243355cb9faecb55aec878a06ee9" "cf08ae4c26cacce2eebff39d129ea0a21c9d7bf70ea9b945588c1c66392578d1" default)))
+    ("b0c5c6cc59d530d3f6fbcfa67801993669ce062dda1435014f74cafac7d86246" "b67b2279fa90e4098aa126d8356931c7a76921001ddff0a8d4a0541080dee5f6" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "7f1263c969f04a8e58f9441f4ba4d7fb1302243355cb9faecb55aec878a06ee9" "cf08ae4c26cacce2eebff39d129ea0a21c9d7bf70ea9b945588c1c66392578d1" default)))
+ '(js-indent-level 2)
  '(package-selected-packages
    (quote
-    (base16-theme rainbow-mode minimap company-auctex neotree flycheck-popup-tip use-package sublimity solarized-theme powerline-evil org-evil material-theme indium flyspell-popup flyspell-correct-popup flymake-json flymake-jslint flycheck evil-tutor better-defaults auto-indent-mode auctex))))
+    (magit typescript-mode base16-theme rainbow-mode minimap company-auctex neotree flycheck-popup-tip use-package sublimity solarized-theme powerline-evil org-evil material-theme indium flyspell-popup flyspell-correct-popup flymake-json flymake-jslint flycheck evil-tutor better-defaults auto-indent-mode auctex)))
+ '(typescript-indent-level 2))
 
