@@ -47,6 +47,7 @@
 (which-key-mode 1) ;;Shows key code completion
 
 ;; VISUAL
+
 (autoload 'hideshowvis-enable "hideshowvis" "Highlight foldable regions")
 
 (autoload 'hideshowvis-minor-mode
@@ -78,6 +79,10 @@
 (add-hook 'lisp-mode-hook       'hs-minor-mode)
 (add-hook 'perl-mode-hook       'hs-minor-mode)
 (add-hook 'sh-mode-hook         'hs-minor-mode)
+
+;;JSON
+ (eval-after-load 'json
+   (global-set-key (kbd "C-c p") 'json-pretty-print-buffer))
 ;; (setq calendar-location-name "Berlin") 
 ;; (setq calendar-latitude 49.76)
 ;; (setq calendar-longitude 9.93)
@@ -177,7 +182,7 @@
  '(js-indent-level 2)
  '(package-selected-packages
    (quote
-    (browse-kill-ring hideshowvis company-tern folding flycheck-pos-tip company-quickhelp json-mode ac-js2 flycheck-yamllint yaml-mode magit typescript-mode base16-theme rainbow-mode minimap company-auctex neotree flycheck-popup-tip use-package sublimity solarized-theme powerline-evil org-evil material-theme indium flyspell-popup flyspell-correct-popup flymake-json flymake-jslint flycheck evil-tutor better-defaults auto-indent-mode auctex)))
+    (figlet browse-kill-ring hideshowvis company-tern folding flycheck-pos-tip company-quickhelp json-mode ac-js2 flycheck-yamllint yaml-mode magit typescript-mode base16-theme rainbow-mode minimap company-auctex neotree flycheck-popup-tip use-package sublimity solarized-theme powerline-evil org-evil material-theme indium flyspell-popup flyspell-correct-popup flymake-json flymake-jslint flycheck evil-tutor better-defaults auto-indent-mode auctex)))
  '(semantic-mode t)
  '(typescript-indent-level 2)
  '(vc-annotate-background nil)
