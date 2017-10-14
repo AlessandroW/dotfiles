@@ -1,0 +1,18 @@
+!    # Dark Mode
+#define base07 #f8f8f8 
+#define base06 #e8e8e8 
+#define base05 #d8d8d8 
+#define base04 #b8b8b8 
+#define base03 #585858 
+#define base02 #383838 
+#define base01 #282828 
+#define base00 #181818
+#define base08 #DC322F
+#define base09 #f1c40f
+#define base0A #f39c12
+#define base0B #27ae60
+#define base0C #33CC99
+#define base0D #6699FF
+#define base0E #CC66FF
+#define base0F #CCCCCC
+
