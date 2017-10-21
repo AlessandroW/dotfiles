@@ -1,0 +1,75 @@
+(require 'package)
+
+(add-to-list 'package-archives
+'("elpy" . "http://jorgenschaefer.github.io/packages/"))
+
+(add-to-list 'package-archives
+'("marmalade" . "http://marmalade-repo.org/packages/"))
+
+(add-to-list 'package-archives
+'("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+
+(add-to-list 'package-archives
+              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+
+;;(add-to-list 'load-path "~/.emacs.d/site-lisp/")
+
+
+; list the packages you want
+(setq package-list
+'(
+smartparens
+helm
+json-mode
+typescript-mode
+magit
+yaml-mode
+flycheck-yamllint
+ac-js2
+flycheck-pos-tip
+folding
+company-tern
+hideshowvis
+browse-kill-ring
+figlet
+flyspell-correct-helm
+ein
+elpy
+base16-theme
+rainbow-mode
+minimap
+company-auctex
+neotree
+flycheck-popup-tip
+use-package
+sublimity
+solarized-theme
+powerline-evil
+org-evil
+indium
+flyspell-popup
+flyspell-correct-popup
+flymake-json
+flymake-jslint
+flycheck
+evil-tutor
+better-defaults
+auto-indent-mode
+auctex
+evil
+
+))
+
+; activate all the packages
+(package-initialize)
+
+; fetch the list of packages available 
+(unless package-archive-contents
+(package-refresh-contents))
+
+; install the missing packages
+(dolist (package package-list)
+(unless (package-installed-p package)
+(package-install package)))
+
