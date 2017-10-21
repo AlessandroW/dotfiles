@@ -30,6 +30,9 @@ ac-js2
 flycheck-pos-tip
 folding
 company-tern
+company-quickhelp
+which-key
+js2-refactor
 hideshowvis
 browse-kill-ring
 figlet
