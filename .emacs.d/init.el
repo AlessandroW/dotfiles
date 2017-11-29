@@ -78,6 +78,14 @@
 (add-hook 'lisp-mode-hook       'hs-minor-mode)
 (add-hook 'perl-mode-hook       'hs-minor-mode)
 (add-hook 'sh-mode-hook         'hs-minor-mode)
+(add-hook 'prog-mode-hook         'hideshowvis-minor-mode)
+
+;;
+;;Programming
+;;
+
+
+(add-hook 'prog-mode-hook 'projectile-mode)
 
 ;;JSON
  ;; (eval-after-load 'json
@@ -101,10 +109,10 @@
 
 
 ;;PYTHON
-(elpy-enable)
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
+;; (elpy-enable)
+;; (when (require 'flycheck nil t)
+;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+;;   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;;(minimap-mode 1)
 ;;(setq minimap-window-location 'right)
@@ -120,9 +128,18 @@
 
 ;;UTILITY
 
+
 (global-set-key (kbd "C-c y") 'browse-kill-ring)
 
 (require 'better-defaults)
+;;Javascript
+
+(add-hook 'js-mode-hook (lambda ()
+                          (unless (eq major-mode 'json-mode)
+                            (tern-mode)
+                            (context-coloring-mode))))
+(eval-after-load 'context-coloring
+  '(tern-context-coloring-setup))
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
@@ -158,6 +175,18 @@
 (with-eval-after-load 'flycheck
   (flycheck-pos-tip-mode))
 (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+;;use local tslint from node_modules vefore global
+
+(defun my/use-tslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (tslint (and root
+                      (expand-file-name "node_modules/tslint/bin/tslint"
+                                        root))))
+    (when (and tslint (file-executable-p tslint))
+      (setq-local flycheck-javascript-tslint-executable tslint))))
+(add-hook 'flycheck-mode-hook #'my/use-tslint-from-node-modules)
 
 (require 'powerline)
 (require 'powerline-evil)
@@ -167,6 +196,27 @@
   (package-install 'indium))
 (require 'indium)
 (add-hook 'js-mode-hook #'indium-interaction-mode)
+
+;;TYPESCRIPT
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  ;; company is an optional dependency. You have to
+  ;; install it separately via package-install
+  ;; `M-x package-install [ret] company`
+  (company-mode +1))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+(add-hook 'before-save-hook 'tide-format-before-save)
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 (defun toggle-transparency ()
   (interactive)
@@ -190,7 +240,11 @@
  '(custom-safe-themes
    (quote
     ("5a39d2a29906ab273f7900a2ae843e9aa29ed5d205873e1199af4c9ec921aaab" "2a998a3b66a0a6068bcb8b53cd3b519d230dd1527b07232e54c8b9d84061d48d" "16dd114a84d0aeccc5ad6fd64752a11ea2e841e3853234f19dc02a7b91f5d661" "3380a2766cf0590d50d6366c5a91e976bdc3c413df963a0ab9952314b4577299" "c9f102cf31165896631747fd20a0ca0b9c64ecae019ce5c2786713a5b7d6315e" "36746ad57649893434c443567cb3831828df33232a7790d232df6f5908263692" "b0c5c6cc59d530d3f6fbcfa67801993669ce062dda1435014f74cafac7d86246" "b67b2279fa90e4098aa126d8356931c7a76921001ddff0a8d4a0541080dee5f6" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" "7f1263c969f04a8e58f9441f4ba4d7fb1302243355cb9faecb55aec878a06ee9" "cf08ae4c26cacce2eebff39d129ea0a21c9d7bf70ea9b945588c1c66392578d1" default)))
-'(semantic-mode t)
+ '(js-indent-level 2)
+ '(package-selected-packages
+   (quote
+    (projectile ggtags tide tern-auto-complete tern-context-coloring autopair markdown-preview-mode markdown-mode flycheck-pycheckers json-mode typescript-mode magit yaml-mode flycheck-yamllint ac-js2 flycheck-pos-tip folding company-tern hideshowvis browse-kill-ring figlet flyspell-correct-helm ein elpy base16-theme rainbow-mode minimap company-auctex neotree flycheck-popup-tip use-package sublimity solarized-theme powerline-evil org-evil material-theme indium flyspell-popup flyspell-correct-popup flymake-json flymake-jslint flycheck evil-tutor better-defaults auto-indent-mode auctex)))
+ '(semantic-mode t)
  '(typescript-indent-level 2)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
@@ -213,7 +267,4 @@
      (320 . "#ff9800")
      (340 . "#fff59d")
      (360 . "#8bc34a"))))
- '(vc-annotate-very-old-color nil)
- '(package-selected-packages
-   (quote
-    (json-mode typescript-mode magit yaml-mode flycheck-yamllint ac-js2 flycheck-pos-tip folding company-tern hideshowvis browse-kill-ring figlet flyspell-correct-helm ein elpy base16-theme rainbow-mode minimap company-auctex neotree flycheck-popup-tip use-package sublimity solarized-theme powerline-evil org-evil material-theme indium flyspell-popup flyspell-correct-popup flymake-json flymake-jslint flycheck evil-tutor better-defaults auto-indent-mode auctex))))
+ '(vc-annotate-very-old-color nil))

@@ -115,14 +115,12 @@ bindsym $mod+minus scratchpad show
 #Program bindings
 #
 # start deepin screenshot
-bindsym $mod+Shift+d exec deepin-screenshot
-
-# set german layout
+bindsym $mod+Shift+d exec "gnome-screenshot -a"
 
 bindsym $mod+Shift+z exec setxkbmap -layout de
 
 # start firefox
-bindsym $mod+Shift+f exec firefox
+bindsym $mod+Shift+f exec chrome_dev 
 
 # open filebrowser
 bindsym $mod+Shift+g exec pcmanfm
@@ -346,16 +344,16 @@ bar {
 
 #background
 #exec wal -a 50 -i ~/Bilder/Wallpapers/Nature
-exec redshift -l 49.791304:9.953355
-exec adaptive_theme
+# exec redshift -l 49.791304:9.953355
+# exec adaptive_theme
 exec xsettingsd
 exec feh --bg-scale -z Bilder/Wallpapers/
 #exec nohup python3 .skripte/WeatherDesk/WeatherDesk.py -t 4 -c Wuerzburg -d ~/.weatherdesk_walls/FireWatch-WeatherDesk-Pack-master > /dev/null &
 # transparent inactive windows
 exec compton -b -c 
 # Würzburg 49.791304:9.953355
-exec dunst
-exec battery_checker
+# exec dunst
+# exec battery_checker
 exec xset s off -dpms
 #exec nextcloud
-exec --no-startup-id i3-msg 'workspace $workspace2; exec firefox ; workspace $workspace1; exec emacs' 
+exec --no-startup-id i3-msg 'workspace $workspace2; exec chrome_dev; exec emacs ; workspace $workspace1; exec rambox' 
